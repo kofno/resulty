@@ -22,3 +22,5 @@ A disjunction implementation in TypeScript.
     }
 
 # docs
+
+[API](https://kofno.github.io/resulty)
