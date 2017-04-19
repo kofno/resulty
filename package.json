@@ -5,6 +5,10 @@
   "main": "dist/index.js",
   "author": "Ryan L. Bell <ryan.l.bell@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kofno/resulty.git"
+  },
   "scripts": {
     "docs": "typedoc --out docs",
     "test": "ts-node node_modules/tape/bin/tape tests/**/*.ts | tap-spec"
