@@ -31,6 +31,10 @@ class Err<E> extends Result<E, any> {
   public cata<B>(matcher: Catamorphism<E, any, B>): B {
     return matcher.Err(this.error);
   }
+
+  public ap(result: Result<E, any>): Result<E, any> {
+    return this as Result<E, any>;
+  }
 }
 
 /**

@@ -36,6 +36,9 @@ var Err = (function (_super) {
     Err.prototype.cata = function (matcher) {
         return matcher.Err(this.error);
     };
+    Err.prototype.ap = function (result) {
+        return this;
+    };
     return Err;
 }(Result_1.default));
 /**

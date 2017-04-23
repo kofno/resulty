@@ -41,3 +41,14 @@ test("Err.mapError", t => {
   });
   t.end();
 });
+
+test("Err.ap", t => {
+  const fn = (a: string) => (b: number) => ({ a, b });
+
+  err("oops!").ap(ok("hi")).ap(ok(42)).cata({
+    Err: m => t.pass(`Failed as expected: ${m}`),
+    Ok: v => t.fail(`Should have failed: ${JSON.stringify(v)}`),
+  });
+
+  t.end();
+});

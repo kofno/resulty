@@ -9,6 +9,7 @@ declare class Err<E> extends Result<E, any> {
     andThen(fn: (_: any) => Result<E, any>): Result<E, any>;
     orElse<X>(fn: (err: E) => Result<X, any>): Result<X, any>;
     cata<B>(matcher: Catamorphism<E, any, B>): B;
+    ap(result: Result<E, any>): Result<E, any>;
 }
 /**
  * A convenience function for creating a new Err.

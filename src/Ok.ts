@@ -31,6 +31,14 @@ class Ok<A> extends Result<any, A> {
   public cata<B>(matcher: Catamorphism<any, A, B>): B {
     return matcher.Ok(this.value);
   }
+
+  public ap<B, C>(result: Result<any, B>): Result<any, C> {
+    if (typeof this.value !== "function") {
+      throw new TypeError(`'ap' can only be applied to functions: ${JSON.stringify(this.value)}`);
+    }
+
+    return result.map(this.value) as Result<any, C>;
+  }
 }
 
 /**

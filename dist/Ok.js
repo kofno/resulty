@@ -36,6 +36,12 @@ var Ok = (function (_super) {
     Ok.prototype.cata = function (matcher) {
         return matcher.Ok(this.value);
     };
+    Ok.prototype.ap = function (result) {
+        if (typeof this.value !== "function") {
+            throw new TypeError("'ap' can only be applied to functions: " + JSON.stringify(this.value));
+        }
+        return result.map(this.value);
+    };
     return Ok;
 }(Result_1.default));
 /**

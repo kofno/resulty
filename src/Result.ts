@@ -43,6 +43,12 @@ abstract class Result<E, A> {
    */
   public abstract cata<B>(matcher: Catamorphism<E, A, B>): B;
 
+  /**
+   * Apply the value of a successful result to a function result. If this
+   * result is an Err, nothing happens. If this result is NOT a function,
+   * a TypeError is raised.
+   */
+  public abstract ap<B, C>(result: Result<E, B>): Result<E, C>;
 }
 
 export default Result;
