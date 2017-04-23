@@ -5,10 +5,14 @@ declare class Ok<A> extends Result<any, A> {
     constructor(theValue: A);
     getOrElse(_: A): A;
     map<B>(fn: (a: A) => B): Result<any, B>;
+    mapError<X>(fn: (e: any) => any): Result<any, A>;
     andThen<B>(fn: (a: A) => Ok<B>): Result<any, B>;
     orElse(fn: (_: any) => Result<any, A>): Result<any, A>;
     cata<B>(matcher: Catamorphism<any, A, B>): B;
 }
+/**
+ * A convenience function for create a new Ok.
+ */
 declare function ok<T>(v: T): Ok<T>;
 export default Ok;
 export { ok };

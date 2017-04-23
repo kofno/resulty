@@ -24,6 +24,9 @@ var Err = (function (_super) {
     Err.prototype.map = function (fn) {
         return this;
     };
+    Err.prototype.mapError = function (fn) {
+        return new Err(fn(this.error));
+    };
     Err.prototype.andThen = function (fn) {
         return this;
     };
@@ -35,6 +38,9 @@ var Err = (function (_super) {
     };
     return Err;
 }(Result_1.default));
+/**
+ * A convenience function for creating a new Err.
+ */
 function err(e) { return new Err(e); }
 exports.err = err;
 exports.default = Err;

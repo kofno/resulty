@@ -1,5 +1,5 @@
 {
-    "compileOnSave": true,
+    "compileOnSave": false,
     "compilerOptions": {
         "module": "commonjs",
         "target": "ES5",
@@ -9,13 +9,14 @@
         "strictNullChecks": true,
         "sourceMap": true,
         "declaration": true,
-        "outDir": "dist"
+        "outDir": "dist",
+        "watch": true
     },
     "include": [
         "src/**/*"
     ],
     "exclude": [
         "node_modules",
-        "**/*.spec.ts"
+        "**/*.test.ts"
     ]
 }

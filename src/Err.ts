@@ -16,6 +16,10 @@ class Err<E> extends Result<E, any> {
     return this as Result<E, B>;
   }
 
+  public mapError<X>(fn: (err: E) => X): Result<X, any> {
+    return new Err(fn(this.error));
+  }
+
   public andThen(fn: (_: any) => Result<E, any>): Result<E, any> {
     return this as Result<E, any>;
   }

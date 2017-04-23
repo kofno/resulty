@@ -33,3 +33,12 @@ test("Ok.cata", t => {
   t.equals("foo", result);
   t.end();
 });
+
+test("Ok.mapError", t => {
+  ok("foo").mapError(m => m.toUpperCase()).cata({
+    Err: err => t.fail("should have passed"),
+    Ok: v => t.pass("Worked!"),
+  });
+
+  t.end();
+});

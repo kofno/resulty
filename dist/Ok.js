@@ -24,6 +24,9 @@ var Ok = (function (_super) {
     Ok.prototype.map = function (fn) {
         return new Ok(fn(this.value));
     };
+    Ok.prototype.mapError = function (fn) {
+        return this;
+    };
     Ok.prototype.andThen = function (fn) {
         return fn(this.value);
     };
@@ -35,6 +38,9 @@ var Ok = (function (_super) {
     };
     return Ok;
 }(Result_1.default));
+/**
+ * A convenience function for create a new Ok.
+ */
 function ok(v) { return new Ok(v); }
 exports.ok = ok;
 exports.default = Ok;

@@ -16,6 +16,10 @@ class Ok<A> extends Result<any, A> {
     return new Ok(fn(this.value));
   }
 
+  public mapError<X>(fn: (e: any) => any): Result<any, A> {
+    return this as Result<any, A>;
+  }
+
   public andThen<B>(fn: (a: A) => Ok<B>): Result<any, B> {
     return fn(this.value) as Result<any, B>;
   }
