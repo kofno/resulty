@@ -1,6 +1,6 @@
 {
   "name": "resulty",
-  "version": "1.2.0",
+  "version": "0.0.0-development",
   "description": "A return type for computations that may fail",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -12,7 +12,9 @@
   },
   "scripts": {
     "docs": "typedoc --out docs",
-    "test": "ts-node node_modules/tape/bin/tape tests/**/*.ts | tap-spec"
+    "test": "ts-node node_modules/tape/bin/tape tests/**/*.ts | tap-spec",
+    "build": "tsc",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "devDependencies": {
     "@types/tape": "^4.2.29",
@@ -21,6 +23,7 @@
     "ts-node": "^3.0.2",
     "tslint": "^5.1.0",
     "typedoc": "^0.5.10",
-    "typescript": "^2.2.2"
+    "typescript": "^2.2.2",
+    "semantic-release": "^8.0.3"
   }
 }
