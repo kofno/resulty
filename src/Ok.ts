@@ -1,50 +1,54 @@
-import Catamorphism from "./Catamorphism";
-import Result from "./Result";
+import Catamorphism from './Catamorphism';
+import Result from './Result';
 
-class Ok<A> extends Result<any, A> {
+class Ok<Err, A> extends Result<Err, A> {
   private value: A;
   constructor(theValue: A) {
     super();
     this.value = theValue;
   }
 
-  public getOrElse(_: A): A {
+  public getOrElse(fn: () => A): A {
     return this.value;
   }
 
-  public map<B>(fn: (a: A) => B): Result<any, B> {
+  public getOrElseValue(_: A): A {
+    return this.value;
+  }
+
+  public map<B>(fn: (a: A) => B): Result<Err, B> {
     return new Ok(fn(this.value));
   }
 
-  public mapError<X>(fn: (e: any) => any): Result<any, A> {
-    return this as Result<any, A>;
+  public mapError<X>(fn: (e: Err) => X): Result<X, A> {
+    return new Ok<X, A>(this.value);
   }
 
-  public andThen<B>(fn: (a: A) => Ok<B>): Result<any, B> {
-    return fn(this.value) as Result<any, B>;
+  public andThen<B>(fn: (a: A) => Result<Err, B>): Result<Err, B> {
+    return fn(this.value);
   }
 
   public orElse(fn: (_: any) => Result<any, A>): Result<any, A> {
     return this as Result<any, A>;
   }
 
-  public cata<B>(matcher: Catamorphism<any, A, B>): B {
+  public cata<B>(matcher: Catamorphism<Err, A, B>): B {
     return matcher.Ok(this.value);
   }
 
-  public ap<B, C>(result: Result<any, B>): Result<any, C> {
-    if (typeof this.value !== "function") {
+  public ap<B, C>(result: Result<Err, B>): Result<Err, C> {
+    if (typeof this.value !== 'function') {
       throw new TypeError(`'ap' can only be applied to functions: ${JSON.stringify(this.value)}`);
     }
 
-    return result.map(this.value) as Result<any, C>;
+    return result.map(this.value);
   }
 }
 
 /**
  * A convenience function for create a new Ok.
  */
-function ok<T>(v: T) { return new Ok(v); }
+const ok = <Err, T>(v: T): Result<Err, T> => new Ok(v);
 
 export default Ok;
 export { ok };

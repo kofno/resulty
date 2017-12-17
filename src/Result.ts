@@ -1,16 +1,21 @@
-import Catamorphism from "./Catamorphism";
+import Catamorphism from './Catamorphism';
 
 /**
  * A Result represents a computation that may succeed or fail. Ok<T> represents
  * a successful computation, while Err<E> represents a failure.
  */
 abstract class Result<E, A> {
+  /**
+   * Returns the value from a successful result. For an error, returns the
+   * result of evaluating the fn
+   */
+  public abstract getOrElse(fn: () => A): A;
 
   /**
    * Returns the value from a successful result. Returns the defaultValue if
    * the result was a failure.
    */
-  public abstract getOrElse(defaultValue: A): A;
+  public abstract getOrElseValue(defaultValue: A): A;
 
   /**
    * Returns a new result after applying fn to the value stored in a successful
