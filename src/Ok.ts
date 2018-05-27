@@ -2,10 +2,8 @@ import Catamorphism from './Catamorphism';
 import Result from './Result';
 
 class Ok<Err, A> extends Result<Err, A> {
-  private value: A;
-  constructor(theValue: A) {
+  constructor(private value: A) {
     super();
-    this.value = theValue;
   }
 
   public getOrElse(fn: () => A): A {
@@ -42,6 +40,16 @@ class Ok<Err, A> extends Result<Err, A> {
     }
 
     return result.map(this.value);
+  }
+
+  public assign<K extends string, B>(
+    k: K,
+    other: Result<Err, B> | ((a: A) => Result<Err, B>)
+  ): Result<Err, A & { [k in K]: B }> {
+    const result = other instanceof Result ? other : other(this.value);
+    return result.andThen(b =>
+      ok<Err, A & { [k in K]: B }>({ ...Object(this.value), [k.toString()]: b })
+    );
   }
 }
 

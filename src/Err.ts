@@ -2,10 +2,8 @@ import Catamorphism from './Catamorphism';
 import Result from './Result';
 
 class Err<E, A> extends Result<E, A> {
-  private error: E;
-  constructor(theError: E) {
+  constructor(private error: E) {
     super();
-    this.error = theError;
   }
 
   public getOrElse(fn: () => A): A {
@@ -38,6 +36,13 @@ class Err<E, A> extends Result<E, A> {
 
   public ap<B, C>(result: Result<E, B>): Result<E, C> {
     return new Err<E, C>(this.error);
+  }
+
+  public assign<K extends string, B>(
+    k: K,
+    other: Result<E, B> | ((a: A) => Result<E, B>)
+  ): Result<E, A & { [k in K]: B }> {
+    return new Err<E, A & { [k in K]: B }>(this.error);
   }
 }
 

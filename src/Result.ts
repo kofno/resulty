@@ -54,6 +54,23 @@ abstract class Result<E, A> {
    * a TypeError is raised.
    */
   public abstract ap<B, C>(result: Result<E, B>): Result<E, C>;
+
+  /**
+   * Encapsulates a common pattern of needing to build up an Object from
+   * a series of Result values. This is often solved by nesting `andThen` calls
+   * and then completing the chain with a call to `ok`.
+   *
+   * This feature was inspired (and the code lifted from) this article:
+   * https://medium.com/@dhruvrajvanshi/simulating-haskells-do-notation-in-typescript-e48a9501751c
+   *
+   * Wrapped values are converted to an Object using the Object constructor
+   * before assigning. Primitives won't fail at runtime, but results may
+   * be unexpected.
+   */
+  public abstract assign<K extends string, B>(
+    k: K,
+    other: Result<E, B> | ((a: A) => Result<E, B>)
+  ): Result<E, A & { [k in K]: B }>;
 }
 
 export default Result;

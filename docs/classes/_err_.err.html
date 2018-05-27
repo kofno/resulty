@@ -114,6 +114,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite"><a href="_err_.err.html#andthen" class="tsd-kind-icon">and<wbr>Then</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite"><a href="_err_.err.html#ap" class="tsd-kind-icon">ap</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite"><a href="_err_.err.html#assign" class="tsd-kind-icon">assign</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite"><a href="_err_.err.html#cata" class="tsd-kind-icon">cata</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="_err_.err.html#getorelse" class="tsd-kind-icon">get<wbr>OrElse</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="_err_.err.html#getorelsevalue" class="tsd-kind-icon">get<wbr>OrElse<wbr>Value</a></li>
@@ -131,19 +132,19 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Err<span class="tsd-signature-symbol">(</span>theError<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_err_.err.html" class="tsd-signature-type">Err</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Err<span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_err_.err.html" class="tsd-signature-type">Err</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/kofno/resulty/blob/0e80c14/src/Err.ts#L5">Err.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/kofno/resulty/blob/61ed660/src/Err.ts#L4">Err.ts:4</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>theError: <span class="tsd-signature-type">E</span></h5>
+									<h5>error: <span class="tsd-signature-type">E</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_err_.err.html" class="tsd-signature-type">Err</a></h4>
@@ -159,7 +160,7 @@
 					<div class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">E</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/kofno/resulty/blob/0e80c14/src/Err.ts#L5">Err.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/kofno/resulty/blob/61ed660/src/Err.ts#L5">Err.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -177,7 +178,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_result_.result.html">Result</a>.<a href="_result_.result.html#andthen">andThen</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/kofno/resulty/blob/0e80c14/src/Err.ts#L27">Err.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/kofno/resulty/blob/61ed660/src/Err.ts#L25">Err.ts:25</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -225,7 +226,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_result_.result.html">Result</a>.<a href="_result_.result.html#ap">ap</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/kofno/resulty/blob/0e80c14/src/Err.ts#L39">Err.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/kofno/resulty/blob/61ed660/src/Err.ts#L37">Err.ts:37</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -248,6 +249,42 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
+					<a name="assign" class="tsd-anchor"></a>
+					<h3>assign</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">assign&lt;K, B&gt;<span class="tsd-signature-symbol">(</span>k<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, other<span class="tsd-signature-symbol">: </span><a href="_result_.result.html" class="tsd-signature-type">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_result_.result.html" class="tsd-signature-type">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides <a href="_result_.result.html">Result</a>.<a href="_result_.result.html#assign">assign</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/kofno/resulty/blob/61ed660/src/Err.ts#L41">Err.ts:41</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h4>
+								</li>
+								<li>
+									<h4>B</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>k: <span class="tsd-signature-type">K</span></h5>
+								</li>
+								<li>
+									<h5>other: <a href="_result_.result.html" class="tsd-signature-type">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_result_.result.html" class="tsd-signature-type">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
 					<a name="cata" class="tsd-anchor"></a>
 					<h3>cata</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
@@ -258,7 +295,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_result_.result.html">Result</a>.<a href="_result_.result.html#cata">cata</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/kofno/resulty/blob/0e80c14/src/Err.ts#L35">Err.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/kofno/resulty/blob/61ed660/src/Err.ts#L33">Err.ts:33</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -288,7 +325,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_result_.result.html">Result</a>.<a href="_result_.result.html#getorelse">getOrElse</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/kofno/resulty/blob/0e80c14/src/Err.ts#L11">Err.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/kofno/resulty/blob/61ed660/src/Err.ts#L9">Err.ts:9</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -324,7 +361,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_result_.result.html">Result</a>.<a href="_result_.result.html#getorelsevalue">getOrElseValue</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/kofno/resulty/blob/0e80c14/src/Err.ts#L15">Err.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/kofno/resulty/blob/61ed660/src/Err.ts#L13">Err.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -348,7 +385,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_result_.result.html">Result</a>.<a href="_result_.result.html#map">map</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/kofno/resulty/blob/0e80c14/src/Err.ts#L19">Err.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/kofno/resulty/blob/61ed660/src/Err.ts#L17">Err.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -396,7 +433,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_result_.result.html">Result</a>.<a href="_result_.result.html#maperror">mapError</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/kofno/resulty/blob/0e80c14/src/Err.ts#L23">Err.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/kofno/resulty/blob/61ed660/src/Err.ts#L21">Err.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -444,7 +481,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_result_.result.html">Result</a>.<a href="_result_.result.html#orelse">orElse</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/kofno/resulty/blob/0e80c14/src/Err.ts#L31">Err.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/kofno/resulty/blob/61ed660/src/Err.ts#L29">Err.ts:29</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -524,6 +561,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
 								<a href="_err_.err.html#ap" class="tsd-kind-icon">ap</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
+								<a href="_err_.err.html#assign" class="tsd-kind-icon">assign</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
 								<a href="_err_.err.html#cata" class="tsd-kind-icon">cata</a>
