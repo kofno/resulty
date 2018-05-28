@@ -47,9 +47,10 @@ class Ok<Err, A> extends Result<Err, A> {
     other: Result<Err, B> | ((a: A) => Result<Err, B>)
   ): Result<Err, A & { [k in K]: B }> {
     const result = other instanceof Result ? other : other(this.value);
-    return result.andThen(b =>
-      ok<Err, A & { [k in K]: B }>({ ...Object(this.value), [k.toString()]: b })
-    );
+    return result.map<A & { [k in K]: B }>(b => ({
+      ...Object(this.value),
+      [k.toString()]: b,
+    }));
   }
 }
 
