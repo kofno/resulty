@@ -1,7 +1,7 @@
 import Catamorphism from './Catamorphism';
 import Result from './Result';
 
-class Ok<Err, A> extends Result<Err, A> {
+class Ok<E, A> extends Result<E, A> {
   constructor(private value: A) {
     super();
   }
@@ -14,15 +14,15 @@ class Ok<Err, A> extends Result<Err, A> {
     return this.value;
   }
 
-  public map<B>(fn: (a: A) => B): Result<Err, B> {
+  public map<B>(fn: (a: A) => B): Result<E, B> {
     return new Ok(fn(this.value));
   }
 
-  public mapError<X>(fn: (e: Err) => X): Result<X, A> {
+  public mapError<X>(fn: (e: E) => X): Result<X, A> {
     return new Ok<X, A>(this.value);
   }
 
-  public andThen<B>(fn: (a: A) => Result<Err, B>): Result<Err, B> {
+  public andThen<B>(fn: (a: A) => Result<E, B>): Result<E, B> {
     return fn(this.value);
   }
 
@@ -30,11 +30,11 @@ class Ok<Err, A> extends Result<Err, A> {
     return this as Result<any, A>;
   }
 
-  public cata<B>(matcher: Catamorphism<Err, A, B>): B {
+  public cata<B>(matcher: Catamorphism<E, A, B>): B {
     return matcher.Ok(this.value);
   }
 
-  public ap<B, C>(result: Result<Err, B>): Result<Err, C> {
+  public ap<B, C>(result: Result<E, B>): Result<E, C> {
     if (typeof this.value !== 'function') {
       throw new TypeError(`'ap' can only be applied to functions: ${JSON.stringify(this.value)}`);
     }
@@ -44,20 +44,25 @@ class Ok<Err, A> extends Result<Err, A> {
 
   public assign<K extends string, B>(
     k: K,
-    other: Result<Err, B> | ((a: A) => Result<Err, B>)
-  ): Result<Err, A & { [k in K]: B }> {
+    other: Result<E, B> | ((a: A) => Result<E, B>),
+  ): Result<E, A & { [k in K]: B }> {
     const result = other instanceof Result ? other : other(this.value);
     return result.map<A & { [k in K]: B }>(b => ({
       ...Object(this.value),
       [k.toString()]: b,
     }));
   }
+
+  public do(fn: (a: A) => void): Result<E, A> {
+    fn(this.value);
+    return new Ok<E, A>(this.value);
+  }
 }
 
 /**
  * A convenience function for create a new Ok.
  */
-const ok = <Err, T>(v: T): Result<Err, T> => new Ok(v);
+const ok = <E, T>(v: T): Result<E, T> => new Ok(v);
 
 export default Ok;
 export { ok };

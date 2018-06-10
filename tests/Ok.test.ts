@@ -35,12 +35,10 @@ test('Ok.cata', t => {
 });
 
 test('Ok.mapError', t => {
-  ok<string, string>('foo')
-    .mapError(m => m.toUpperCase())
-    .cata({
-      Err: err => t.fail('should have passed'),
-      Ok: v => t.pass('Worked!'),
-    });
+  ok<string, string>('foo').mapError(m => m.toUpperCase()).cata({
+    Err: err => t.fail('should have passed'),
+    Ok: v => t.pass('Worked!'),
+  });
 
   t.end();
 });
@@ -48,32 +46,32 @@ test('Ok.mapError', t => {
 test('Ok.ap', t => {
   const fn = (a: string) => (b: number) => ({ a, b });
 
-  ok(fn)
-    .ap(ok('hi'))
-    .ap(ok(42))
-    .cata({
-      Err: m => t.fail(`Should have passed: ${m}`),
-      Ok: v => t.pass(`Worked!: ${JSON.stringify(v)}`),
-    });
+  ok(fn).ap(ok('hi')).ap(ok(42)).cata({
+    Err: m => t.fail(`Should have passed: ${m}`),
+    Ok: v => t.pass(`Worked!: ${JSON.stringify(v)}`),
+  });
 
-  ok(fn)
-    .ap(ok('hi'))
-    .ap(err('oops!'))
-    .cata({
-      Err: m => t.pass(`ap failed: ${m}`),
-      Ok: v => t.fail(`should have failed: ${v}`),
-    });
+  ok(fn).ap(ok('hi')).ap(err('oops!')).cata({
+    Err: m => t.pass(`ap failed: ${m}`),
+    Ok: v => t.fail(`should have failed: ${v}`),
+  });
 
   t.end();
 });
 
 test('Ok.assign', t => {
-  ok({})
-    .assign('x', ok(42))
-    .assign('y', v => ok(String(v.x + 8)))
-    .cata({
-      Err: m => t.fail(`Should have succeeded: ${m}`),
-      Ok: v => t.deepEqual(v, { x: 42, y: '50' }),
-    });
+  ok({}).assign('x', ok(42)).assign('y', v => ok(String(v.x + 8))).cata({
+    Err: m => t.fail(`Should have succeeded: ${m}`),
+    Ok: v => t.deepEqual(v, { x: 42, y: '50' }),
+  });
+  t.end();
+});
+
+test('Ok.do', t => {
+  ok({}).assign('x', ok(42)).do(scope => t.pass(`'do' should run: ${JSON.stringify(scope)}`)).cata({
+    Err: m => t.fail(`Should have succeeded: ${m}`),
+    Ok: v => t.deepEqual(v, { x: 42 }),
+  });
+
   t.end();
 });

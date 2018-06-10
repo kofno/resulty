@@ -69,8 +69,27 @@ abstract class Result<E, A> {
    */
   public abstract assign<K extends string, B>(
     k: K,
-    other: Result<E, B> | ((a: A) => Result<E, B>)
+    other: Result<E, B> | ((a: A) => Result<E, B>),
   ): Result<E, A & { [k in K]: B }>;
+
+  /**
+   * Inject a side-effectual operation into a chain of Result computations.
+   *
+   * The primary use case for `do` is to perform logging in the middle of a flow
+   * of Results.
+   *
+   * The side effect only runs when there isn't an error (Ok).
+   *
+   * The value will (should) remain unchanged during the `do` operation.
+   *
+   *    ok({})
+   *      .assign('foo', ok(42))
+   *      .assign('bar', ok('hello'))
+   *      .do(scope => console.log('Scope: ', JSON.stringify(scope)))
+   *      .map(doSomethingElse)
+   *
+   */
+  public abstract do(fn: (a: A) => void): Result<E, A>;
 }
 
 export default Result;

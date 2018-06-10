@@ -40,9 +40,13 @@ class Err<E, A> extends Result<E, A> {
 
   public assign<K extends string, B>(
     k: K,
-    other: Result<E, B> | ((a: A) => Result<E, B>)
+    other: Result<E, B> | ((a: A) => Result<E, B>),
   ): Result<E, A & { [k in K]: B }> {
     return new Err<E, A & { [k in K]: B }>(this.error);
+  }
+
+  public do(fn: (a: A) => void): Result<E, A> {
+    return new Err<E, A>(this.error);
   }
 }
 
