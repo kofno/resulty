@@ -1,15 +1,21 @@
 import * as test from 'tape';
-import { err, ok } from './../src/index';
+import { ok } from './../src/index';
 
 test('Ok.getOrElse', t => {
   const result = ok<string, string>('foo');
-  t.equal('foo', result.getOrElse(() => 'bar'));
+  t.equal(
+    'foo',
+    result.getOrElse(() => 'bar')
+  );
   t.end();
 });
 
 test('OK.map', t => {
   const result = ok<string, string>('foo');
-  t.equal('FOO', result.map(s => s.toUpperCase()).getOrElse(() => ''));
+  t.equal(
+    'FOO',
+    result.map(s => s.toUpperCase()).getOrElse(() => '')
+  );
   t.end();
 });
 
@@ -35,43 +41,46 @@ test('Ok.cata', t => {
 });
 
 test('Ok.mapError', t => {
-  ok<string, string>('foo').mapError(m => m.toUpperCase()).cata({
-    Err: err => t.fail('should have passed'),
-    Ok: v => t.pass('Worked!'),
-  });
-
-  t.end();
-});
-
-test('Ok.ap', t => {
-  const fn = (a: string) => (b: number) => ({ a, b });
-
-  ok(fn).ap(ok('hi')).ap(ok(42)).cata({
-    Err: m => t.fail(`Should have passed: ${m}`),
-    Ok: v => t.pass(`Worked!: ${JSON.stringify(v)}`),
-  });
-
-  ok(fn).ap(ok('hi')).ap(err('oops!')).cata({
-    Err: m => t.pass(`ap failed: ${m}`),
-    Ok: v => t.fail(`should have failed: ${v}`),
-  });
+  ok<string, string>('foo')
+    .mapError(m => m.toUpperCase())
+    .cata({
+      Err: err => t.fail('should have passed'),
+      Ok: v => t.pass('Worked!'),
+    });
 
   t.end();
 });
 
 test('Ok.assign', t => {
-  ok({}).assign('x', ok(42)).assign('y', v => ok(String(v.x + 8))).cata({
-    Err: m => t.fail(`Should have succeeded: ${m}`),
-    Ok: v => t.deepEqual(v, { x: 42, y: '50' }),
-  });
+  ok({})
+    .assign('x', ok(42))
+    .assign('y', v => ok(String(v.x + 8)))
+    .cata({
+      Err: m => t.fail(`Should have succeeded: ${m}`),
+      Ok: v => t.deepEqual(v, { x: 42, y: '50' }),
+    });
   t.end();
 });
 
 test('Ok.do', t => {
-  ok({}).assign('x', ok(42)).do(scope => t.pass(`'do' should run: ${JSON.stringify(scope)}`)).cata({
-    Err: m => t.fail(`Should have succeeded: ${m}`),
-    Ok: v => t.deepEqual(v, { x: 42 }),
-  });
+  ok({})
+    .assign('x', ok(42))
+    .do(scope => t.pass(`'do' should run: ${JSON.stringify(scope)}`))
+    .cata({
+      Err: m => t.fail(`Should have succeeded: ${m}`),
+      Ok: v => t.deepEqual(v, { x: 42 }),
+    });
+
+  t.end();
+});
+
+test('Ok.elseDo', t => {
+  ok({ x: 42 })
+    .elseDo(err => t.fail(`Error side effect should not run: ${err}`))
+    .cata({
+      Err: m => t.fail(`Should have succeeded: ${m}`),
+      Ok: v => t.deepEqual(v, { x: 42 }),
+    });
 
   t.end();
 });

@@ -49,13 +49,6 @@ abstract class Result<E, A> {
   public abstract cata<B>(matcher: Catamorphism<E, A, B>): B;
 
   /**
-   * Apply the value of a successful result to a function result. If this
-   * result is an Err, nothing happens. If this result is NOT a function,
-   * a TypeError is raised.
-   */
-  public abstract ap<B, C>(result: Result<E, B>): Result<E, C>;
-
-  /**
    * Encapsulates a common pattern of needing to build up an Object from
    * a series of Result values. This is often solved by nesting `andThen` calls
    * and then completing the chain with a call to `ok`.
@@ -69,7 +62,7 @@ abstract class Result<E, A> {
    */
   public abstract assign<K extends string, B>(
     k: K,
-    other: Result<E, B> | ((a: A) => Result<E, B>),
+    other: Result<E, B> | ((a: A) => Result<E, B>)
   ): Result<E, A & { [k in K]: B }>;
 
   /**
@@ -90,6 +83,22 @@ abstract class Result<E, A> {
    *
    */
   public abstract do(fn: (a: A) => void): Result<E, A>;
+
+  /**
+   * Inject a side-effectual operation into a chain of Result computations.
+   *
+   * The side effect only runs when there is an error (Err).
+   *
+   * The value will remain unchanged during the `elseDo` operation.
+   *
+   *    ok({})
+   *      .assign('foo', ok(42))
+   *      .assign('bar', ok('hello'))
+   *      .do(scope => console.log('Scope: ', JSON.stringify(scope)))
+   *      .map(doSomethingElse)
+   *
+   */
+  public abstract elseDo(fn: (err: E) => void): Result<E, A>;
 }
 
 export default Result;

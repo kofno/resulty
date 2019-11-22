@@ -3,7 +3,10 @@ import { err, ok } from './../src/index';
 
 test('Err.getOrElse', t => {
   const result = err<string, string>('foo');
-  t.equal('bar', result.getOrElse(() => 'bar'));
+  t.equal(
+    'bar',
+    result.getOrElse(() => 'bar')
+  );
   t.end();
 });
 
@@ -35,37 +38,44 @@ test('Err.cata', t => {
 });
 
 test('Err.mapError', t => {
-  err('foo').mapError(m => m.toUpperCase()).cata({
-    Err: err => t.equal('FOO', err),
-    Ok: v => t.fail('should not have passed'),
-  });
-  t.end();
-});
-
-test('Err.ap', t => {
-  const fn = (a: string) => (b: number) => ({ a, b });
-
-  err('oops!').ap(ok('hi')).ap(ok(42)).cata({
-    Err: m => t.pass(`Failed as expected: ${m}`),
-    Ok: v => t.fail(`Should have failed: ${JSON.stringify(v)}`),
-  });
-
+  err('foo')
+    .mapError(m => m.toUpperCase())
+    .cata({
+      Err: err => t.equal('FOO', err),
+      Ok: v => t.fail('should not have passed'),
+    });
   t.end();
 });
 
 test('Err.assign', t => {
-  ok({}).assign('x', ok(42)).assign('y', () => err('ooops!')).cata({
-    Err: m => t.pass(`Failed as expected: ${m}`),
-    Ok: v => t.fail(`Should have failed: ${JSON.stringify(v)}`),
-  });
+  ok({})
+    .assign('x', ok(42))
+    .assign('y', () => err('ooops!'))
+    .cata({
+      Err: m => t.pass(`Failed as expected: ${m}`),
+      Ok: v => t.fail(`Should have failed: ${JSON.stringify(v)}`),
+    });
   t.end();
 });
 
 test('Err.do', t => {
-  err('oops!').do(v => t.fail(`Should NOT run side effect: ${v}`)).cata({
-    Err: m => t.pass(`Should be an error: ${m}`),
-    Ok: v => t.fail(`Should not succeeded: ${JSON.stringify(v)}`),
-  });
+  err('oops!')
+    .do(v => t.fail(`Should NOT run side effect: ${v}`))
+    .cata({
+      Err: m => t.pass(`Should be an error: ${m}`),
+      Ok: v => t.fail(`Should not succeeded: ${JSON.stringify(v)}`),
+    });
+
+  t.end();
+});
+
+test('Err.elseDo', t => {
+  err('oops!')
+    .elseDo(v => t.pass(`Error side effect ran: ${v}`))
+    .cata({
+      Err: m => t.pass(`Should be an error: ${m}`),
+      Ok: v => t.fail(`Should not succeed: ${JSON.stringify(v)}`),
+    });
 
   t.end();
 });
