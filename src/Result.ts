@@ -15,10 +15,20 @@ interface Ok<A> {
  * a successful computation, while Err<E> represents a failure.
  */
 export class Result<E, A> {
+  /**
+   * Construct a successful result
+   * @param value a value to wrap in Ok
+   * @returns a new Result with the value wrapped in Ok
+   */
   public static ok<E, A>(value: A): Result<E, A> {
     return new Result<E, A>({ kind: 'ok', value });
   }
 
+  /**
+   * Construct a failed result
+   * @param error a value to wrap in Err
+   * @returns a new Result with the value wrapped in Err
+   */
   public static err<E, A>(error: E): Result<E, A> {
     return new Result<E, A>({ kind: 'err', error });
   }
@@ -188,8 +198,8 @@ export class Result<E, A> {
    *
    *    ok({})
    *      .assign('foo', ok(42))
-   *      .assign('bar', ok('hello'))
-   *      .do(scope => console.log('Scope: ', JSON.stringify(scope)))
+   *      .assign('bar', err('hello'))
+   *      .elseDo(scope => console.log('Scope: ', JSON.stringify(scope)))
    *      .map(doSomethingElse)
    *
    */
