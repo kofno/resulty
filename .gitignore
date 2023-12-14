@@ -2,3 +2,5 @@ node_modules
 src/*.js
 .idea/
 dist/
+npm/
+.vscode/
