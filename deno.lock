@@ -1,7 +1,8 @@
 {
   "version": "3",
   "redirects": {
-    "https://deno.land/x/dnt/mod.ts": "https://deno.land/x/dnt@0.39.0/mod.ts"
+    "https://deno.land/x/dnt/mod.ts": "https://deno.land/x/dnt@0.39.0/mod.ts",
+    "https://deno.land/x/kofno_resulty/mod.ts": "https://deno.land/x/kofno_resulty@v6.0.0/mod.ts"
   },
   "remote": {
     "https://deno.land/std@0.140.0/_util/assert.ts": "e94f2eb37cebd7f199952e242c77654e43333c1ac4c5c700e929ea3aa5489f74",
@@ -102,6 +103,10 @@
     "https://deno.land/x/dnt@0.39.0/lib/utils.ts": "224f15f33e7226a2fd991e438d0291d7ed8c7889807efa2e1ecb67d2d1db6720",
     "https://deno.land/x/dnt@0.39.0/mod.ts": "9df36a862161d9eb376472b699f6cb08ba0ad1704e0826fbe13be766bd3c01da",
     "https://deno.land/x/dnt@0.39.0/transform.ts": "f68743a14cf9bf53bfc9c81073871d69d447a7f9e3453e0447ca2fb78926bb1d",
+    "https://deno.land/x/kofno_resulty@v6.0.0/mod.ts": "62e8bad0367465ff9baf1861ba23e51e2fe19feaea2fe298965f1b4d46a30ac8",
+    "https://deno.land/x/kofno_resulty@v6.0.0/src/Catamorphism.ts": "a318443ba8db73ccc7741f8fad46b8691590904a46cecfb6e2851c38ec8c73e9",
+    "https://deno.land/x/kofno_resulty@v6.0.0/src/Result.ts": "3e0a9a64442647474387f9aaa6cc318b3710539a7107ebb9d2480d1109026211",
+    "https://deno.land/x/kofno_resulty@v6.0.0/src/index.ts": "266274a125d0023b3c272d2372f8b94c30a6baa04164a5a09819aa50212c40f3",
     "https://deno.land/x/ts_morph@20.0.0/bootstrap/mod.ts": "b53aad517f106c4079971fcd4a81ab79fadc40b50061a3ab2b741a09119d51e9",
     "https://deno.land/x/ts_morph@20.0.0/bootstrap/ts_morph_bootstrap.js": "6645ac03c5e6687dfa8c78109dc5df0250b811ecb3aea2d97c504c35e8401c06",
     "https://deno.land/x/ts_morph@20.0.0/common/DenoRuntime.ts": "6a7180f0c6e90dcf23ccffc86aa8271c20b1c4f34c570588d08a45880b7e172d",

@@ -1,5 +1,5 @@
 import { assertEquals } from "https://deno.land/std@0.208.0/assert/mod.ts";
-import { ok } from "./mod.ts";
+import { ok } from "https://deno.land/x/kofno_resulty/mod.ts";
 
 Deno.test("ok", () => {
   ok(1)
