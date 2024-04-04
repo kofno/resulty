@@ -151,7 +151,7 @@ export class Result<E, A> {
     const state = this.state;
     switch (state.kind) {
       case 'ok': {
-        const result = other instanceof Result ? other : other(state.value);
+        const result = typeof other === 'function' ? other(state.value) : other;
         return result.map<A & { [k in K]: B }>(b => ({
           ...Object(state.value),
           [k.toString()]: b,
