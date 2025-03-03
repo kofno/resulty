@@ -1,0 +1,49 @@
+{
+  "name": "resulty",
+  "version": "7.0.0",
+  "description": "A disjunction implementation in TypeScript.",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "bun tsup",
+    "test": "bun test",
+    "docs": "typedoc src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kofno/resulty.git"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "keywords": [
+    "result",
+    "disjunction",
+    "typescript",
+    "error",
+    "monad",
+    "functional"
+  ],
+  "author": "Ryan L. Bell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kofno/resulty/issues"
+  },
+  "homepage": "https://github.com/kofno/resulty#readme",
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typedoc": "^0.25.4",
+    "typescript": "^5.3.3"
+  },
+  "files": [
+    "dist/**/*",
+    "LICENSE.md",
+    "README.md"
+  ],
+  "type": "module"
+}
