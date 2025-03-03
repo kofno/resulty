@@ -4,12 +4,12 @@ export interface Catamorphism<E, A, B> {
 }
 
 
-interface Err<E> {
+export interface Err<E> {
   kind: 'err';
   error: E;
 }
 
-interface Ok<A> {
+export interface Ok<A> {
   kind: 'ok';
   value: A;
 }
@@ -35,6 +35,20 @@ export class Result<E, A> {
    */
   public static err<E, A>(error: E): Result<E, A> {
     return new Result<E, A>({ kind: 'err', error });
+  }
+
+  /**
+   * Returns true if the result is a success
+   */
+  public isOk(): this is Result<E, A> & { state: Ok<A> } {
+    return this.state.kind === 'ok';
+  }
+
+  /**
+   * Returns true if the result is a failure
+   */
+  public isErr(): this is Result<E, A> & { state: Err<E> } {
+    return this.state.kind === 'err';
   }
 
   /**
@@ -217,7 +231,7 @@ export class Result<E, A> {
     }
   }
 
-  private constructor(private state: Err<E> | Ok<A>) {}
+  private constructor(public readonly state: Err<E> | Ok<A>) {}
 }
 
 export function ok<E, A>(value: A): Result<E, A> {
@@ -226,4 +240,12 @@ export function ok<E, A>(value: A): Result<E, A> {
 
 export function err<E, A>(error: E): Result<E, A> {
   return Result.err<E, A>(error);
+}
+
+export function isOk<E, A>(result: Result<E, A>): result is Result<E, A> & { state: Ok<A> } {
+  return result.isOk();
+}
+
+export function isErr<E, A>(result: Result<E, A>): result is Result<E, A> & { state: Err<E> } {
+  return result.isErr();
 }

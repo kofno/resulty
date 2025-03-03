@@ -1,6 +1,6 @@
 {
   "name": "resulty",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "description": "A disjunction implementation in TypeScript.",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -45,5 +45,12 @@
     "LICENSE.md",
     "README.md"
   ],
-  "type": "module"
+  "type": "module",
+  "prettier": {
+    "singleQuote": true,
+    "semi": true,
+    "trailingComma": "all",
+    "tabWidth": 2,
+    "printWidth": 80
+  }
 }

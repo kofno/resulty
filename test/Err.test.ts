@@ -1,5 +1,5 @@
 import { strict as assert } from 'assert';
-import { err, ok } from '../src/index.ts';
+import { err, ok } from '../src/index';
 
 function fail(message: string): never {
   throw new Error(message);
@@ -28,8 +28,8 @@ describe('Err', () => {
 
   it('Err.cata', () => {
     const result = err('foo').cata({
-      Err: (err: string) => err,
-      Ok: (v: string) => v,
+      Err: (err) => err,
+      Ok: (v) => v,
     });
     assert.equal(result, 'foo');
   });
@@ -48,26 +48,40 @@ describe('Err', () => {
       .assign('x', ok(42))
       .assign('y', () => err('ooops!'))
       .cata({
-        Err: (m: string) => assert.ok(true, `Failed as expected: ${m}`),
-        Ok: (v: object) => fail(`Should have failed: ${JSON.stringify(v)}`),
+        Err: (m) => assert.ok(true, `Failed as expected: ${m}`),
+        Ok: (v) => fail(`Should have failed: ${JSON.stringify(v)}`),
       });
   });
 
   it('Err.do', () => {
     err('oops!')
-      .do((v: string) => fail(`Should NOT run side effect: ${v}`))
+      .do((v) => fail(`Should NOT run side effect: ${v}`))
       .cata({
-        Err: (m: string) => assert.ok(true, `Should be an error: ${m}`),
-        Ok: (v: object) => fail(`Should not succeeded: ${JSON.stringify(v)}`),
+        Err: (m) => assert.ok(true, `Should be an error: ${m}`),
+        Ok: (v) => fail(`Should not succeeded: ${JSON.stringify(v)}`),
       });
   });
 
   it('Err.elseDo', () => {
     err('oops!')
-      .elseDo((v: string) => assert.ok(true, `Error side effect ran: ${v}`))
+      .elseDo((v) => assert.ok(true, `Error side effect ran: ${v}`))
       .cata({
-        Err: (m: string) => assert.ok(true, `Should be an error: ${m}`),
-        Ok: (v: object) => fail(`Should not succeed: ${JSON.stringify(v)}`),
+        Err: (m) => assert.ok(true, `Should be an error: ${m}`),
+        Ok: (v) => fail(`Should not succeed: ${JSON.stringify(v)}`),
       });
   });
+
+  it ('Err.isOk', () => {
+    const result = err('foo');
+    assert.equal(result.isOk(), false);
+  }
+  );
+  it ('Err.isErr', () => {
+    const result = err('foo');
+    assert.equal(result.isErr(), true);
+    if (result.isErr()) {
+      assert.equal(result.state.error, 'foo');
+    }
+  }
+  );
 });
